@@ -20,6 +20,7 @@ Vue.prototype.$http = window.axios;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('joke', require('./components/Joke.vue').default);
+Vue.component('joke-search', require('./components/JokeSearch.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

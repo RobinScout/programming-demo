@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="container pt-3">
-        <joke></joke>
+        <joke class="mb-3"></joke>
+        <joke-search></joke-search>
     </div>
 @endsection

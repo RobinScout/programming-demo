@@ -1,8 +1,8 @@
 <template>
     <div class="card">
         <div class="card-header d-flex justify-content-between">
-            <span>Chuck Norris Joke</span>
-            <button class="btn btn-primary" type="button" :disabled="loading" @click="loadJoke">
+            <span>Random Chuck Norris Joke</span>
+            <button class="btn btn-primary btn-sm" type="button" :disabled="loading" @click="loadJoke">
                 <span v-if="loading">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span class="sr-only">Loading...</span>
@@ -43,7 +43,7 @@
                 this.loading = true;
                 this.joke = null;
 
-                this.$http.get('/joke/random').then(({data}) => {
+                this.$http.get('/joke/random').then(({ data }) => {
                     this.joke = data;
                 }).finally(() => {
                     this.loading = false;

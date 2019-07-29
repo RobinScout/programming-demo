@@ -27,4 +27,11 @@ class JokeController extends Controller
 
         return response()->json($joke);
     }
+
+    public function search(Request $request)
+    {
+        $jokes = Joke::where('value', 'LIKE', '%' . $request->query('value') . '%')->get();
+
+        return response()->json($jokes);
+    }
 }
