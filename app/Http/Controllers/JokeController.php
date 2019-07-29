@@ -30,7 +30,13 @@ class JokeController extends Controller
 
     public function search(Request $request)
     {
-        $jokes = Joke::where('value', 'LIKE', '%' . $request->query('value') . '%')->get();
+        $query = Joke::query();
+
+        foreach($request->query('values') as $value) {
+            $query->orWhere('value', 'LIKE', '%' . $value . '%');
+        }
+
+        $jokes = $query->get();
 
         return response()->json($jokes);
     }
