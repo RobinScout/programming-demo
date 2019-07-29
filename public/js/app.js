@@ -1853,6 +1853,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1869,9 +1883,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       this.joke = null;
-      this.$http.get('https://api.chucknorris.io/jokes/random').then(function (_ref) {
+      this.$http.get('/joke/random').then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
         _this.joke = data;
       })["finally"](function () {
         _this.loading = false;
@@ -37177,14 +37190,43 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-header" }, [_vm._v("Chuck Norris Joke")]),
+    _c("div", { staticClass: "card-header d-flex justify-content-between" }, [
+      _c("span", [_vm._v("Chuck Norris Joke")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button", disabled: _vm.loading },
+          on: { click: _vm.loadJoke }
+        },
+        [
+          _vm.loading
+            ? _c("span", [
+                _c("span", {
+                  staticClass: "spinner-border spinner-border-sm",
+                  attrs: { role: "status", "aria-hidden": "true" }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])
+              ])
+            : _c("span", [_vm._v("\n                Refresh\n            ")])
+        ]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _vm.loading
         ? _c("div", { staticClass: "d-flex justify-content-center" }, [
             _vm._m(0)
           ])
-        : _c("span", [_vm._v(_vm._s(_vm.joke.value))])
+        : _c("div", [
+            _vm.joke
+              ? _c("span", [_vm._v(_vm._s(_vm.joke.value))])
+              : _c("span", { staticClass: "text-danger" }, [
+                  _vm._v("Unable to load joke.")
+                ])
+          ])
     ])
   ])
 }

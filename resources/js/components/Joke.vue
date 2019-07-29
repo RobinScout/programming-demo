@@ -1,6 +1,17 @@
 <template>
     <div class="card">
-        <div class="card-header">Chuck Norris Joke</div>
+        <div class="card-header d-flex justify-content-between">
+            <span>Chuck Norris Joke</span>
+            <button class="btn btn-primary" type="button" :disabled="loading" @click="loadJoke">
+                <span v-if="loading">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="sr-only">Loading...</span>
+                </span>
+                <span v-else>
+                    Refresh
+                </span>
+            </button>
+        </div>
 
         <div class="card-body">
             <div v-if="loading" class="d-flex justify-content-center">
@@ -8,7 +19,10 @@
                   <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <span v-else>{{ joke.value }}</span>
+            <div v-else>
+                <span v-if="joke">{{ joke.value }}</span>
+                <span v-else class="text-danger">Unable to load joke.</span>
+            </div>
         </div>
     </div>
 </template>
@@ -29,8 +43,7 @@
                 this.loading = true;
                 this.joke = null;
 
-                this.$http.get('https://api.chucknorris.io/jokes/random').then(({data}) => {
-                    console.log(data);
+                this.$http.get('/joke/random').then(({data}) => {
                     this.joke = data;
                 }).finally(() => {
                     this.loading = false;

@@ -15,4 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/jokes', 'JokeController@index')->name('jokes');
+
+Route::group(['prefix' => 'joke'], function () {
+    Route::get('/', 'JokeController@index')->name('joke.index');
+    Route::get('/random', 'JokeController@random')->name('joke.random');
+});
