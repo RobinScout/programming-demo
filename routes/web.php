@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', 'Hello@index')->name('hello');
+Route::get('/jokes', 'JokeController@index')->name('jokes');
